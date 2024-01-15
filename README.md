@@ -6,6 +6,8 @@
 ## Summary
 airline sentiment tweets analysis
 
+Create classification data for openai fine tuning 
+
 ## Knowledge
 (a) 
 ![Alt text](image.png)
@@ -30,6 +32,34 @@ tokens = encoding.encode(text)
 
 
 ## Steps
-(1) Load openai API_KEY
+#### (1) Load openai API_KEY
 Create .env file, with API_KEY = "YOUR_API_KEY", load API_KEY with load_dotenv package 
 
+#### (2) Create classification data for LLM
+user content: the tweet
+assistant content: the sentiment which we want to predict, 
+
+you want to assistant(openai) to predict the sentiment
+
+```
+ex:
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant. You are to extract the sentiment analysis from the provided airline tweets."
+    },
+    {
+      "role": "user",
+      "content": "Airline: Virgin America\n\nTweet: @VirginAmerica What @dhepburn said.\n\nAirline Sentiment: "
+    },
+    {
+      "role": "assistant",
+      "content": "neutral"
+    }
+  ]
+}
+```
+
+#### (3) Create training jsonl file to send to openai
+#### (4) openai helps create a fine tune model for your dataset,  with more epochs  increase performace
